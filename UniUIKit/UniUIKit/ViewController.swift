@@ -10,7 +10,7 @@ import UIKit
 class ViewController: UIViewController {
     
     // MARK: - UI Components
-    private let iconTextView: IconLabelView = {
+    private let iconLabelView: IconLabelView = {
         let view = IconLabelView()
         view.translatesAutoresizingMaskIntoConstraints = false
         return view
@@ -24,7 +24,7 @@ class ViewController: UIViewController {
 
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
-        ViewAnchorAnalyzer.printAllAnchors(for: iconTextView)
+        ViewAnchorAnalyzer.printAllAnchors(for: iconLabelView)
     }
 
     // MARK: - Setup
@@ -32,15 +32,15 @@ class ViewController: UIViewController {
         view.backgroundColor = .systemBackground
         
         // IconTextView 설정
-        iconTextView.configure(icon: UIImage(named: "icon_star"), text: "별점 예시")
+        iconLabelView.configure(icon: UIImage(named: "icon_star"), text: "별점 예시")
         
         // 뷰에 추가
-        view.addSubview(iconTextView)
+        view.addSubview(iconLabelView)
         
         // Auto Layout 설정
         NSLayoutConstraint.activate([
-            iconTextView.centerXAnchor.constraint(equalTo: view.centerXAnchor),
-            iconTextView.centerYAnchor.constraint(equalTo: view.centerYAnchor)
+            iconLabelView.centerXAnchor.constraint(equalTo: view.centerXAnchor),
+            iconLabelView.centerYAnchor.constraint(equalTo: view.centerYAnchor)
         ])
     }
 }
