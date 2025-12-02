@@ -29,6 +29,11 @@
 			path = UniUIKit;
 			sourceTree = "<group>";
 		};
+		E6CF00352EDEB9F30017DD1F /* Resouce */ = {
+			isa = PBXFileSystemSynchronizedRootGroup;
+			path = Resouce;
+			sourceTree = "<group>";
+		};
 /* End PBXFileSystemSynchronizedRootGroup section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -45,6 +50,7 @@
 		E6CF00122EDEB3A30017DD1F = {
 			isa = PBXGroup;
 			children = (
+				E6CF00352EDEB9F30017DD1F /* Resouce */,
 				E6CF001D2EDEB3A30017DD1F /* UniUIKit */,
 				E6CF001C2EDEB3A30017DD1F /* Products */,
 			);
@@ -75,6 +81,7 @@
 			);
 			fileSystemSynchronizedGroups = (
 				E6CF001D2EDEB3A30017DD1F /* UniUIKit */,
+				E6CF00352EDEB9F30017DD1F /* Resouce */,
 			);
 			name = UniUIKit;
 			packageProductDependencies = (
