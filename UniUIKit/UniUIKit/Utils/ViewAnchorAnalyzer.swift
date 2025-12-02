@@ -17,11 +17,17 @@ struct ViewAnchorAnalyzer {
         printAnchors(for: view, indent: 0)
         
         // Codable Object로 변환하여 출력
-        if let jsonData = try? JSONEncoder().encode(anchorInfo),
+        let encoder = JSONEncoder()
+        encoder.outputFormatting = [.prettyPrinted, .sortedKeys]
+        if let jsonData = try? encoder.encode(anchorInfo),
            let jsonString = String(data: jsonData, encoding: .utf8) {
             print("\n=== Codable Object (JSON) ===")
             print(jsonString)
         }
+        
+        // 디버깅: 실제로 찾은 constraint 정보 출력
+        print("\n=== Debug: Found Constraints ===")
+        printDebugInfo(for: anchorInfo)
     }
     
     /// 뷰와 모든 서브뷰의 Anchor 정보를 Codable Object로 반환하는 함수
@@ -53,8 +59,12 @@ struct ViewAnchorAnalyzer {
         let bottomInfo = findConstraintInfo(for: .bottom, in: allConstraints, view: view)
         let leftInfo = findConstraintInfo(for: .left, in: allConstraints, view: view)
         let rightInfo = findConstraintInfo(for: .right, in: allConstraints, view: view)
+        let leadingInfo = findConstraintInfo(for: .leading, in: allConstraints, view: view)
+        let trailingInfo = findConstraintInfo(for: .trailing, in: allConstraints, view: view)
         let centerXInfo = findConstraintInfo(for: .centerX, in: allConstraints, view: view)
         let centerYInfo = findConstraintInfo(for: .centerY, in: allConstraints, view: view)
+        let widthInfo = findConstraintInfo(for: .width, in: allConstraints, view: view)
+        let heightInfo = findConstraintInfo(for: .height, in: allConstraints, view: view)
         
         // 서브뷰 재귀적으로 처리
         let subviews = view.subviews.map { createAnchorInfo(for: $0) }
@@ -65,8 +75,12 @@ struct ViewAnchorAnalyzer {
             bottom: bottomInfo,
             left: leftInfo,
             right: rightInfo,
+            leading: leadingInfo,
+            trailing: trailingInfo,
             centerX: centerXInfo,
             centerY: centerYInfo,
+            width: widthInfo,
+            height: heightInfo,
             subviews: subviews
         )
     }
@@ -196,6 +210,22 @@ struct ViewAnchorAnalyzer {
         }
         
         print("") // 빈 줄 추가
+    }
+    
+    /// 디버깅을 위한 constraint 정보 출력
+    private static func printDebugInfo(for anchorInfo: ViewAnchorInfo) {
+        print("View: \(anchorInfo.viewName)")
+        if let top = anchorInfo.top { print("  ✅ top: constant=\(top.constant), relation=\(top.relation)") } else { print("  ❌ top: nil") }
+        if let bottom = anchorInfo.bottom { print("  ✅ bottom: constant=\(bottom.constant), relation=\(bottom.relation)") } else { print("  ❌ bottom: nil") }
+        if let left = anchorInfo.left { print("  ✅ left: constant=\(left.constant), relation=\(left.relation)") } else { print("  ❌ left: nil") }
+        if let right = anchorInfo.right { print("  ✅ right: constant=\(right.constant), relation=\(right.relation)") } else { print("  ❌ right: nil") }
+        if let leading = anchorInfo.leading { print("  ✅ leading: constant=\(leading.constant), relation=\(leading.relation)") } else { print("  ❌ leading: nil") }
+        if let trailing = anchorInfo.trailing { print("  ✅ trailing: constant=\(trailing.constant), relation=\(trailing.relation)") } else { print("  ❌ trailing: nil") }
+        if let centerX = anchorInfo.centerX { print("  ✅ centerX: constant=\(centerX.constant), relation=\(centerX.relation)") } else { print("  ❌ centerX: nil") }
+        if let centerY = anchorInfo.centerY { print("  ✅ centerY: constant=\(centerY.constant), relation=\(centerY.relation)") } else { print("  ❌ centerY: nil") }
+        if let width = anchorInfo.width { print("  ✅ width: constant=\(width.constant), relation=\(width.relation)") } else { print("  ❌ width: nil") }
+        if let height = anchorInfo.height { print("  ✅ height: constant=\(height.constant), relation=\(height.relation)") } else { print("  ❌ height: nil") }
+        print("")
     }
 }
 

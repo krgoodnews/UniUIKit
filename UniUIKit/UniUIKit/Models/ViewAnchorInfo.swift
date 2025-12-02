@@ -14,8 +14,12 @@ struct ViewAnchorInfo: Codable {
     let bottom: AnchorConstraintInfo?
     let left: AnchorConstraintInfo?
     let right: AnchorConstraintInfo?
+    let leading: AnchorConstraintInfo?
+    let trailing: AnchorConstraintInfo?
     let centerX: AnchorConstraintInfo?
     let centerY: AnchorConstraintInfo?
+    let width: AnchorConstraintInfo?
+    let height: AnchorConstraintInfo?
     let subviews: [ViewAnchorInfo]
 }
 
