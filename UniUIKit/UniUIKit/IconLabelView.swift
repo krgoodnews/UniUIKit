@@ -7,7 +7,7 @@
 
 import UIKit
 
-class IconTextView: UIView {
+class IconLabelView: UIView {
     
     // MARK: - UI Components
     private let stackView: UIStackView = {
