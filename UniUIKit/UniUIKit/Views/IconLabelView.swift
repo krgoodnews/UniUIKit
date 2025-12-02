@@ -1,5 +1,5 @@
 //
-//  IconTextView.swift
+//  IconLabelView.swift
 //  UniUIKit
 //
 //  Created by Goodnews on 12/2/25.
@@ -7,6 +7,7 @@
 
 import UIKit
 
+// MARK: - IconLabelView
 class IconLabelView: UIView {
     
     // MARK: - UI Components
